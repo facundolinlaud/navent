@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/pedido")
-public class PedidoController {
+@RequestMapping(value = "/pedidos")
+public class PedidosController {
     @Autowired
     private PedidosService pedidosService;
 
-    @RequestMapping(method = RequestMethod.POST,  consumes=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/guardar", method = RequestMethod.POST,  consumes=MediaType.APPLICATION_JSON_VALUE)
     Pedido save(@RequestBody PedidoDto pedidoDto) {
         return pedidosService.save(pedidoDto);
     }

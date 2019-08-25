@@ -25,12 +25,12 @@ function getData(){
 function submit(data){
     $.ajax({
         type: "post",
-        url: "pedido",
+        url: "pedidos/guardar",
         data: JSON.stringify(data),
         contentType: "application/json",
 
         success: function(responseData, textStatus, jqXHR) {
-            alert("Pedido guardado con id " + responseData["id"] + ".");
+            alert("Pedido guardado con id " + responseData["idPedido"] + ".");
         },
 
         error: function(jqXHR, textStatus, errorThrown) {
