@@ -2,12 +2,12 @@ package com.facundolinlaud.navent.dto;
 
 public class PedidoDto {
     private String nombre;
-    private float monto;
-    private float descuento;
+    private int monto;
+    private int descuento;
 
     public PedidoDto() {}
 
-    public PedidoDto(String nombre, float monto, float descuento) {
+    public PedidoDto(String nombre, int monto, int descuento) {
         this.nombre = nombre;
         this.monto = monto;
         this.descuento = descuento;
@@ -21,19 +21,19 @@ public class PedidoDto {
         this.nombre = nombre;
     }
 
-    public float getMonto() {
+    public int getMonto() {
         return monto;
     }
 
-    public void setMonto(float monto) {
+    public void setMonto(int monto) {
         this.monto = monto;
     }
 
-    public float getDescuento() {
+    public int getDescuento() {
         return descuento;
     }
 
-    public void setDescuento(float descuento) {
+    public void setDescuento(int descuento) {
         this.descuento = descuento;
     }
 }

@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +46,21 @@ public class PedidosServiceTest {
         List<Pedido> result = pedidosService.getAllPedidos();
 
         Assert.assertEquals(pedidos.size(), result.size());
+    }
+
+    /* Debería ser ConstraintViolationException pero hibernate la wrappea en TransactionSystemException. Tiene solución
+       pero involucra mucha manopla. La idea se entiende! */
+    @Test(expected = TransactionSystemException.class)
+    public void addPedidoWithLongNameShouldThrowException() {
+        StringBuilder stringBuilder = new StringBuilder(206);
+
+        for(int i = 0; i < 205; i++) {
+            stringBuilder.append("a");
+        }
+
+        PedidoDto dto = new PedidoDto(stringBuilder.toString(), 10, 10);
+
+        pedidosService.save(dto);
     }
 
     @Test

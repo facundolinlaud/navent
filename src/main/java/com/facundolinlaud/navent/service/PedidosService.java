@@ -17,11 +17,13 @@ public class PedidosService {
         return pedidosRepository.findAll();
     }
 
-    public void delete(PedidoDto pedidoDto) {
-        pedidosRepository.delete(new Pedido(pedidoDto));
+    public void delete(PedidoDto dto) {
+        Pedido pedido = new Pedido(dto);
+        pedidosRepository.delete(pedido);
     }
 
-    public Pedido save(PedidoDto pedidoDto) {
-        return pedidosRepository.save(new Pedido(pedidoDto));
+    public Pedido save(PedidoDto dto) {
+        Pedido pedido = new Pedido(dto);
+        return pedidosRepository.save(pedido);
     }
 }

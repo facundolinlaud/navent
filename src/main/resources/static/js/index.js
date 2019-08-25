@@ -17,8 +17,8 @@ function getData(){
 
     return {
         "nombre": nombre,
-        "monto": parseFloat(monto),
-        "descuento": parseFloat(descuento)
+        "monto": parseInt(monto),
+        "descuento": parseInt(descuento)
     };
 }
 
