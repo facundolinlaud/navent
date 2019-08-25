@@ -7,4 +7,5 @@ public interface Memcached {
 
     void delete(String key);
 
+    boolean has(String key);
 }

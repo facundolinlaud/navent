@@ -1,8 +1,8 @@
 package com.facundolinlaud.navent;
 
+import com.facundolinlaud.navent.dao.PedidosDao;
 import com.facundolinlaud.navent.dto.PedidoDto;
 import com.facundolinlaud.navent.model.Pedido;
-import com.facundolinlaud.navent.repository.PedidosRepository;
 import com.facundolinlaud.navent.service.PedidosService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,7 +20,7 @@ import java.util.List;
 @SpringBootTest
 public class PedidosServiceTest {
     @Autowired
-    private PedidosRepository pedidosRepository;
+    private PedidosDao pedidosDao;
 
     @Autowired
     private PedidosService pedidosService;
@@ -36,9 +36,9 @@ public class PedidosServiceTest {
     }
 
     @Before
-    public void setUp() throws Exception {
-        pedidosRepository.deleteAll();
-        pedidos.forEach(dto -> pedidosRepository.save(new Pedido(dto)));
+    public void setUp() {
+        pedidosDao.deleteAll();
+        pedidos.forEach(dto -> pedidosDao.save(new Pedido(dto)));
     }
 
     @Test
@@ -65,11 +65,13 @@ public class PedidosServiceTest {
 
     @Test
     public void deletePedidoShouldDeletePedido() {
-        PedidoDto pedido = pedidos.get(0);
+        Pedido newPedido = pedidosService.save(new PedidoDto("nombre", 5, 5));
 
-        pedidosService.delete(pedido);
         List<Pedido> result = pedidosService.getAllPedidos();
+        Assert.assertEquals(pedidos.size() + 1, result.size());
 
-        Assert.assertEquals(pedidos.size() - 1, result.size());
+        pedidosService.delete(newPedido.getIdPedido());
+        result = pedidosService.getAllPedidos();
+        Assert.assertEquals(pedidos.size(), result.size());
     }
 }

@@ -1,7 +1,7 @@
 package com.facundolinlaud.navent;
 
 import com.facundolinlaud.navent.model.Pedido;
-import com.facundolinlaud.navent.repository.PedidosRepository;
+import com.facundolinlaud.navent.dao.PedidosDao;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +15,7 @@ public class NaventApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(PedidosRepository repository){
+	CommandLineRunner runner(PedidosDao repository){
 		return args -> {
 			repository.save(new Pedido("Pedido1", 50, 10));
 			repository.save(new Pedido("Pedido2", 70, 20));
